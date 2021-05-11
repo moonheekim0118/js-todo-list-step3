@@ -58,9 +58,9 @@ const request = async (endPoint, option = {}) => {
 };
 
 export const teamAPI = {
-  addTeam: (name) => request(endPoints.addTeam, options.POST({ name })),
-  loadTeam: () => request(endPoints.loadTeam, options.GET),
-  loadTeamList: () => request(endPoints.loadTeamList, options.GET),
+  addTeam: (name) => request(endPoints.addTeam(), options.POST({ name })),
+  loadTeam: (teamId) => request(endPoints.loadTeam(teamId), options.GET),
+  loadTeamList: () => request(endPoints.loadTeamList(), options.GET),
   removeTeam: (teamId) => request(endPoints.removeTeam(teamId), options.DELETE),
 };
 
