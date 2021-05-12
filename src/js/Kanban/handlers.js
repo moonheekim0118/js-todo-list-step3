@@ -18,6 +18,15 @@ const handlers = {
       console.error(error);
     }
   },
+
+  addNewTodo: async (teamId, memberId, contents) => {
+    try {
+      const result = await memberAPI.addTodo(teamId, memberId, contents);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default handlers;

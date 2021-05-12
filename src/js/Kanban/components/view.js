@@ -50,7 +50,7 @@ const MemberTitleView = (name) =>
 const todoCountView = (count) =>
   `<span class="todo-count">총 <strong>${count}</strong> 개</span>`;
 
-const todoItemView = (todo) => {
+export const todoItemView = (todo) => {
   return `
     <li data-contents=${todo.contents} data-item=${
     todo._id

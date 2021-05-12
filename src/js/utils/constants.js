@@ -3,6 +3,8 @@ export const SELECTORS = {
   ADD_TEAM_BUTTON: "#add-team-button",
   USER_TITLE: "#user-title",
   TODOLIST_CONTAINER: ".todoapp-list-container",
+  MEMBER_TODO: ".todoapp-container",
+  TODO_LIST_MAIN: ".todo-list",
 };
 
 export const CLASS_NAMES = {
@@ -17,11 +19,17 @@ export const CLASS_NAMES = {
   PRIORITY_SELECT: "chip select",
   EDITING: "editing",
   COMPLETED: "completed",
+  TODO_INPUT: "new-todo",
 };
 
 export const ID_NAMES = {
   ADD_TEAM_BUTTON: "add-team-button",
   ADD_MEMBER_BUTTON: "add-user-button",
+};
+
+export const KEY_NAMES = {
+  ENTER: "Enter",
+  ESC: "Escape",
 };
 
 export const ALERT_MESSAGE = {

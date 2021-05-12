@@ -8,6 +8,7 @@ import {
 import { memberNameValidator } from "../utils/validators.js";
 import teamTitle from "./components/teamTitle.js";
 import todoList from "./components/todoList.js";
+import todoInput from "./components/todoInput.js";
 import handlers from "./handlers.js";
 
 // 불러온 team 정보 sessionStorage에 저장해놓기,
@@ -19,8 +20,9 @@ class Kanban {
     this.teamId = getQueryId();
     this.members = [];
     this.teamName = "";
-    this.teamTitleView = new teamTitle(this.teamName);
-    this.todoListView = new todoList(this.members);
+    this.teamTitleComponent = new teamTitle(this.teamName);
+    this.todoListComponent = new todoList(this.members);
+    this.todoInputComponent = new todoInput(this.container, this.teamId);
     this.bindEvents();
     this.init();
   }
@@ -54,16 +56,15 @@ class Kanban {
     }
     const { members } = await handlers.addMember(this.teamId, memberName);
     this.members = [...this.members, members[members.length - 1]];
-    console.log(this.members);
     this.renderTodoList();
   }
 
   renderTeamTitle() {
-    this.teamTitleView.update(this.teamName);
+    this.teamTitleComponent.update(this.teamName);
   }
 
   renderTodoList() {
-    this.todoListView.update(this.members);
+    this.todoListComponent.update(this.members);
   }
 }
 
