@@ -59,12 +59,12 @@ const request = async (endPoint, option = {}) => {
 
 export const teamAPI = {
   addTeam: (name) => request(endPoints.addTeam(), options.POST({ name })),
-  loadTeam: (teamId) => request(endPoints.loadTeam(teamId), options.GET),
   loadTeamList: () => request(endPoints.loadTeamList(), options.GET),
   removeTeam: (teamId) => request(endPoints.removeTeam(teamId), options.DELETE),
 };
 
 export const memberAPI = {
+  loadTeam: (teamId) => request(endPoints.loadTeam(teamId), options.GET),
   addMember: (teamId, name) =>
     request(endPoints.addMember(teamId), options.POST({ name })),
   loadTodoList: (teamId, memberId) =>
