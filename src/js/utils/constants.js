@@ -5,6 +5,7 @@ export const SELECTORS = {
   TODOLIST_CONTAINER: ".todoapp-list-container",
   MEMBER_TODO: ".todoapp-container",
   TODO_LIST_MAIN: ".todo-list",
+  TODO_ITEM: ".todo-list-item ",
 };
 
 export const CLASS_NAMES = {
@@ -17,6 +18,7 @@ export const CLASS_NAMES = {
   DESTROY: "destroy",
   TOGGLE: "toggle",
   PRIORITY_SELECT: "chip select",
+  CLEAR_ALL: "clear-completed",
   EDITING: "editing",
   COMPLETED: "completed",
   TODO_INPUT: "new-todo",

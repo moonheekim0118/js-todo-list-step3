@@ -15,3 +15,9 @@ export const getMemberId = (target) =>
   target.closest(SELECTORS.MEMBER_TODO).dataset.member;
 
 export const getClosestTodo = (target) => target.closest(SELECTORS.MEMBER_TODO);
+
+export const getItemId = (target) =>
+  target.closest(SELECTORS.TODO_ITEM).dataset.item;
+
+export const getClosestTodoItem = (target) =>
+  target.closest(SELECTORS.TODO_ITEM);

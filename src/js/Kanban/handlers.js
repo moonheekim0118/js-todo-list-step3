@@ -27,6 +27,15 @@ const handlers = {
       console.error(error);
     }
   },
+
+  toggleTodo: async (teamId, memberId, itemId) => {
+    try {
+      const result = await memberAPI.toggleTodo(teamId, memberId, itemId);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default handlers;

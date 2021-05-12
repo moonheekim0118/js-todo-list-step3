@@ -9,6 +9,7 @@ import { memberNameValidator } from "../utils/validators.js";
 import teamTitle from "./components/teamTitle.js";
 import todoList from "./components/todoList.js";
 import todoInput from "./components/todoInput.js";
+import todoUpdate from "./components/todoUpdate.js";
 import handlers from "./handlers.js";
 
 // 불러온 team 정보 sessionStorage에 저장해놓기,
@@ -23,6 +24,7 @@ class Kanban {
     this.teamTitleComponent = new teamTitle(this.teamName);
     this.todoListComponent = new todoList(this.members);
     this.todoInputComponent = new todoInput(this.container, this.teamId);
+    this.todoUpdateComponent = new todoUpdate(this.container, this.teamId);
     this.bindEvents();
     this.init();
   }
