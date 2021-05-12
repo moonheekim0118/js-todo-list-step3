@@ -1,5 +1,6 @@
 import { getQueryId } from "../utils/dom.js";
 import teamTitle from "./components/teamTitle.js";
+import todoList from "./components/todoList.js";
 import handlers from "./handlers.js";
 
 // 불러온 team 정보 sessionStorage에 저장해놓기,
@@ -22,6 +23,7 @@ class Kanban {
 
   render() {
     const teamTitleView = new teamTitle(this.teamName);
+    const todoListView = new todoList(this.members);
     // 여기서 members, teamName 받은걸로
     // components 생성
     // components 내부에서 연산하도록

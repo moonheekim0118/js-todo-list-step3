@@ -1,3 +1,5 @@
+import { CLASS_NAMES } from "../../utils/constants.js";
+
 const priorityTemplate = {
   NONE: `
     <select class="chip select" data-action="selectPriority">
@@ -44,6 +46,13 @@ const addUserBtnView = `
     <span class="material-icons">add</span>
   </button>
 </li>`;
+
+const MemberTitleView = (name) =>
+  `
+<h2>
+  <span><strong>${name}</strong>'s Todo List</span>
+</h2>
+`;
 
 const todoCountView = (count) =>
   `<span class="todo-count">총 <strong>${count}</strong> 개</span>`;
