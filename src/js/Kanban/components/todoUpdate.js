@@ -60,7 +60,14 @@ class todoUpdate {
     targetTodoList.innerHTML = updatedChild;
   }
 
-  async removeTodoAll() {}
+  async removeTodoAll(target) {
+    const warn = confirm(ALERT_MESSAGE.REMOVE_TODO_ALERT);
+    if (!warn) return;
+    const memberId = getMemberId(target);
+    await handlers.removeAllTodo(this.teamId, memberId);
+    const targetTodoList = $(SELECTORS.TODO_LIST_MAIN, getClosestTodo(target));
+    targetTodoList.innerHTML = "";
+  }
 }
 
 export default todoUpdate;
