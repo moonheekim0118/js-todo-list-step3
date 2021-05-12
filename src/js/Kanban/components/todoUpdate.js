@@ -1,4 +1,5 @@
 import {
+  PRIORITY,
   SELECTORS,
   CLASS_NAMES,
   ALERT_MESSAGE,
@@ -10,6 +11,7 @@ import {
   getClosestTodoItem,
   getMemberId,
 } from "../../utils/dom.js";
+import { priorityTemplate } from "./view.js";
 import handlers from "../handlers.js";
 
 class todoUpdate {
@@ -26,6 +28,11 @@ class todoUpdate {
         [CLASS_NAMES.TOGGLE]: () => this.toggleHandler(target),
         [CLASS_NAMES.DESTROY]: () => this.removeTodo(target),
         [CLASS_NAMES.CLEAR_ALL]: () => this.removeTodoAll(target),
+        [CLASS_NAMES.PRIORITY_SELECT]: () => {
+          const priority = target.value;
+          if (priority === PRIORITY.NONE) return;
+          this.updatePriorityHandler(target, priority);
+        },
       };
       assignAction[className] && assignAction[className]();
     });
@@ -41,7 +48,14 @@ class todoUpdate {
 
   async updateContentsHanlder() {}
 
-  async updatePriorityHandler() {}
+  async updatePriorityHandler(target, priority) {
+    const memberId = getMemberId(target);
+    const itemId = getItemId(target);
+    const contents = getClosestTodoItem(target).dataset.contents;
+    const labelEl = target.closest(SELECTORS.LABEL);
+    labelEl.innerHTML = priorityTemplate[priority] + contents;
+    await handlers.updatePriority(this.teamId, memberId, itemId, priority);
+  }
 
   async removeTodo(target) {
     const warn = confirm(ALERT_MESSAGE.REMOVE_TODO_ALERT);

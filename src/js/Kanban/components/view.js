@@ -1,6 +1,6 @@
 import { CLASS_NAMES } from "../../utils/constants.js";
 
-const priorityTemplate = {
+export const priorityTemplate = {
   NONE: `
     <select class="chip select" data-action="selectPriority">
       <option value="NONE">순위</option>

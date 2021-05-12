@@ -54,6 +54,20 @@ const handlers = {
       console.error(error);
     }
   },
+
+  updatePriority: async (teamId, memberId, itemId, priority) => {
+    try {
+      const result = await memberAPI.updatePriority(
+        teamId,
+        memberId,
+        itemId,
+        priority
+      );
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default handlers;

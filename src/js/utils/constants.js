@@ -6,6 +6,7 @@ export const SELECTORS = {
   MEMBER_TODO: ".todoapp-container",
   TODO_LIST_MAIN: ".todo-list",
   TODO_ITEM: ".todo-list-item ",
+  LABEL: ".label",
 };
 
 export const CLASS_NAMES = {
@@ -40,4 +41,16 @@ export const ALERT_MESSAGE = {
   TEAM_NAME_ALERT: "팀 이름은 적어도 2글자여야합니다.",
   MEMBER_NAME_ALERT: "멤버 이름은 적어도 2글자여야합니다.",
   REMOVE_TODO_ALERT: "정말로 삭제하시겠습니까?",
+};
+
+export const PRIORITY = {
+  NONE: "NONE",
+  FIRST: "FIRST",
+  SECOND: "SECOND",
+};
+
+export const PRIORITY_BY_NUMBER = {
+  [PRIORITY.NONE]: 3,
+  [PRIORITY.FIRST]: 1,
+  [PRIORITY.SECOND]: 2,
 };
