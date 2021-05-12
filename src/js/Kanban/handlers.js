@@ -36,6 +36,15 @@ const handlers = {
       console.error(error);
     }
   },
+
+  removeTodo: async (teamId, memberId, itemId) => {
+    try {
+      const result = await memberAPI.removeTodo(teamId, memberId, itemId);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default handlers;

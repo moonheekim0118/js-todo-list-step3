@@ -39,4 +39,5 @@ export const ALERT_MESSAGE = {
   TYPE_MEMBER_NAME: "추가 할 멤버 이름을 제출하세요",
   TEAM_NAME_ALERT: "팀 이름은 적어도 2글자여야합니다.",
   MEMBER_NAME_ALERT: "멤버 이름은 적어도 2글자여야합니다.",
+  REMOVE_TODO_ALERT: "정말로 삭제하시겠습니까?",
 };

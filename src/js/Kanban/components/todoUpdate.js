@@ -1,6 +1,11 @@
-import { CLASS_NAMES } from "../../utils/constants.js";
+import {
+  SELECTORS,
+  CLASS_NAMES,
+  ALERT_MESSAGE,
+} from "../../utils/constants.js";
 import {
   $,
+  getClosestTodo,
   getItemId,
   getClosestTodoItem,
   getMemberId,
@@ -38,7 +43,22 @@ class todoUpdate {
 
   async updatePriorityHandler() {}
 
-  async removeTodo(target) {}
+  async removeTodo(target) {
+    const warn = confirm(ALERT_MESSAGE.REMOVE_TODO_ALERT);
+    if (!warn) return;
+    const memberId = getMemberId(target);
+    const itemId = getItemId(target);
+    await handlers.removeTodo(this.teamId, memberId, itemId);
+    const targetTodoList = $(SELECTORS.TODO_LIST_MAIN, getClosestTodo(target));
+    const children = targetTodoList.children;
+    let updatedChild = "";
+    for (const node of children) {
+      if (node.dataset.item !== itemId) {
+        updatedChild += `${node.outerHTML}`;
+      }
+    }
+    targetTodoList.innerHTML = updatedChild;
+  }
 
   async removeTodoAll() {}
 }
