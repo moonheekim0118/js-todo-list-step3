@@ -1,4 +1,11 @@
-import { getQueryId } from "../utils/dom.js";
+import { $, getQueryId } from "../utils/dom.js";
+import {
+  SELECTORS,
+  ID_NAMES,
+  CLASS_NAMES,
+  ALERT_MESSAGE,
+} from "../utils/constants.js";
+import { memberNameValidator } from "../utils/validators.js";
 import teamTitle from "./components/teamTitle.js";
 import todoList from "./components/todoList.js";
 import handlers from "./handlers.js";
@@ -8,9 +15,13 @@ import handlers from "./handlers.js";
 
 class Kanban {
   constructor() {
+    this.container = $(SELECTORS.TODOLIST_CONTAINER);
     this.teamId = getQueryId();
     this.members = [];
     this.teamName = "";
+    this.teamTitleView = new teamTitle(this.teamName);
+    this.todoListView = new todoList(this.members);
+    this.bindEvents();
     this.init();
   }
 
@@ -18,15 +29,41 @@ class Kanban {
     const result = await handlers.loadTeam(this.teamId);
     this.members = result.members;
     this.teamName = result.name;
-    this.render();
+    this.renderTeamTitle();
+    this.renderTodoList();
   }
 
-  render() {
-    const teamTitleView = new teamTitle(this.teamName);
-    const todoListView = new todoList(this.members);
-    // 여기서 members, teamName 받은걸로
-    // components 생성
-    // components 내부에서 연산하도록
+  bindEvents() {
+    this.container.addEventListener("click", ({ target }) => {
+      const { classList, id } = target;
+      if (
+        id === ID_NAMES.ADD_MEMBER_BUTTON ||
+        classList.contains(CLASS_NAMES.ADD_MEMBER_BUTTON)
+      ) {
+        return this.addMemberHandler();
+      }
+    });
+  }
+
+  async addMemberHandler() {
+    const memberName = prompt(ALERT_MESSAGE.TYPE_MEMBER_NAME);
+    if (!memberName) return;
+    if (!memberNameValidator(memberName)) {
+      alert(ALERT_MESSAGE.MEMBER_NAME_ALERT);
+      return;
+    }
+    const { members } = await handlers.addMember(this.teamId, memberName);
+    this.members = [...this.members, members[members.length - 1]];
+    console.log(this.members);
+    this.renderTodoList();
+  }
+
+  renderTeamTitle() {
+    this.teamTitleView.update(this.teamName);
+  }
+
+  renderTodoList() {
+    this.todoListView.update(this.members);
   }
 }
 

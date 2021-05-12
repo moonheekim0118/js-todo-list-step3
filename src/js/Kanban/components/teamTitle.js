@@ -2,8 +2,13 @@ import { SELECTORS } from "../../utils/constants.js";
 import { $ } from "../../utils/dom.js";
 
 class teamTitle {
-  constructor(title) {
+  constructor(title = "") {
     this.container = $(SELECTORS.USER_TITLE);
+    this.title = title;
+    this.render();
+  }
+
+  update(title) {
     this.title = title;
     this.render();
   }

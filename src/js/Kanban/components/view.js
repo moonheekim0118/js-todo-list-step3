@@ -40,13 +40,6 @@ const todoFilterView = `
 </ul>
 `;
 
-const addUserBtnView = `
-<li class="add-user-button-container">
-  <button id="add-user-button" class="ripple">
-    <span class="material-icons">add</span>
-  </button>
-</li>`;
-
 const MemberTitleView = (name) =>
   `
 <h2>
@@ -96,3 +89,10 @@ export const todoListView = (member) => `
     </div>
   </li>
 `;
+
+export const addMemberBtnView = `
+<li class="add-user-button-container">
+  <button id="add-user-button" class="ripple">
+    <span class="material-icons">add</span>
+  </button>
+</li>`;
