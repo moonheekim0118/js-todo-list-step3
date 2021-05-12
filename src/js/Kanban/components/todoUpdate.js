@@ -24,23 +24,24 @@ class todoUpdate {
   bindEvent() {
     this.container.addEventListener("click", ({ target }) => {
       const className = target.className;
+      const itemId = getItemId(target);
+      const memberId = getMemberId(target);
       const assignAction = {
-        [CLASS_NAMES.TOGGLE]: () => this.toggleHandler(target),
-        [CLASS_NAMES.DESTROY]: () => this.removeTodo(target),
-        [CLASS_NAMES.CLEAR_ALL]: () => this.removeTodoAll(target),
+        [CLASS_NAMES.TOGGLE]: () =>
+          this.toggleHandler(target, memberId, itemId),
+        [CLASS_NAMES.DESTROY]: () => this.removeTodo(target, memberId, itemId),
+        [CLASS_NAMES.CLEAR_ALL]: () => this.removeTodoAll(target, memberId),
         [CLASS_NAMES.PRIORITY_SELECT]: () => {
           const priority = target.value;
           if (priority === PRIORITY.NONE) return;
-          this.updatePriorityHandler(target, priority);
+          this.updatePriorityHandler(target, priority, memberId, itemId);
         },
       };
       assignAction[className] && assignAction[className]();
     });
   }
 
-  async toggleHandler(target) {
-    const memberId = getMemberId(target);
-    const itemId = getItemId(target);
+  async toggleHandler(target, memberId, itemId) {
     const targetTodoItem = getClosestTodoItem(target);
     await handlers.toggleTodo(this.teamId, memberId, itemId);
     targetTodoItem.classList.toggle(CLASS_NAMES.COMPLETED);
@@ -48,20 +49,16 @@ class todoUpdate {
 
   async updateContentsHanlder() {}
 
-  async updatePriorityHandler(target, priority) {
-    const memberId = getMemberId(target);
-    const itemId = getItemId(target);
+  async updatePriorityHandler(target, priority, memberId, itemId) {
     const contents = getClosestTodoItem(target).dataset.contents;
     const labelEl = target.closest(SELECTORS.LABEL);
     labelEl.innerHTML = priorityTemplate[priority] + contents;
     await handlers.updatePriority(this.teamId, memberId, itemId, priority);
   }
 
-  async removeTodo(target) {
+  async removeTodo(target, memberId, itemId) {
     const warn = confirm(ALERT_MESSAGE.REMOVE_TODO_ALERT);
     if (!warn) return;
-    const memberId = getMemberId(target);
-    const itemId = getItemId(target);
     await handlers.removeTodo(this.teamId, memberId, itemId);
     const targetTodoList = $(SELECTORS.TODO_LIST_MAIN, getClosestTodo(target));
     const children = targetTodoList.children;
@@ -74,10 +71,9 @@ class todoUpdate {
     targetTodoList.innerHTML = updatedChild;
   }
 
-  async removeTodoAll(target) {
+  async removeTodoAll(target, memberId) {
     const warn = confirm(ALERT_MESSAGE.REMOVE_TODO_ALERT);
     if (!warn) return;
-    const memberId = getMemberId(target);
     await handlers.removeAllTodo(this.teamId, memberId);
     const targetTodoList = $(SELECTORS.TODO_LIST_MAIN, getClosestTodo(target));
     targetTodoList.innerHTML = "";
